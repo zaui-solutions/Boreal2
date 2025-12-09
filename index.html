@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaui Platform Showcase: Seamless Multi-Brand Integration</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Zaui Embedded Booking API (Added once for all widgets) -->
+    <script src="https://borealdemo.zaui.net/themes/default/js/zaui-embed-api-v1.js" defer></script>
+
+    <style>
+        /* --- Branding Variables and Fonts --- */
+        :root {
+            --zaui-primary: #008080; /* Teal for Zaui branding */
+            --zaui-secondary: #ff6600; /* Orange accent */
+            --bg-light: #f7f9fb; /* Very light background for contrast */
+            --bg-dark: #1c2e4a; /* Dark Navy for headers/nav */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+        
+        /* --- Zaui Banner (Consistent) --- */
+        .zaui-banner {
+            background-color: var(--zaui-primary);
+            color: white;
+        }
+
+        /* --- Tab Navigation Styling (Consistent) --- */
+        .tab-nav {
+            background-color: var(--bg-dark);
+            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
+            border-radius: 0.5rem 0.5rem 0 0;
+            margin-top: 2rem;
+        }
+        .tab-button {
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .tab-button:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .tab-button.active {
+            color: white;
+            background-color: var(--zaui-secondary);
+        }
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid var(--zaui-secondary);
+        }
+
+        /* --- Tab Content Display --- */
+        .tab-content {
+            display: none; 
+            overflow: hidden; /* Prevent content overflow */
+        }
+
+        .tab-content.active {
+            display: block; 
+        }
+
+        /* --- Custom Styling for Pulpit Rock Theme --- */
+        .pulpit-rock-hero {
+            /* Image 1: Pulpit Rock Hero */
+            background-image: url('https://www.twofortheworld.com/wp-content/uploads/2016/09/hiking-pulpit-rock-IMG_5405-john-on-pulpit-rock.jpg');
+            background-size: cover;
+            background-position: center;
+            /* Dynamic height based on content */
+            min-height: 400px; 
+        }
+        .pulpit-rock-box {
+            background-color: #03a87c;
+            color: white;
+        }
+        .pulpit-rock-form-bg {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* --- Custom Styling for Skibussen Theme --- */
+        .skibussen-hero {
+            /* Image 1: Sirdal Ski Hero */
+            background-image: url('https://skibussen.no/images/sirdalTurqDark.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 300px;
+        }
+        .skibussen-nav {
+            background-color: #3f6fa3;
+            color: white;
+        }
+        .skibussen-table th { background-color: #e0e8f0; }
+        .skibussen-table td { border-bottom: 1px solid #e0e8f0; }
+
+        /* --- Custom Styling for Boreal Reiser Theme --- */
+        .boreal-reiser-hero {
+            /* Image 1: Boreal Cruise Hero */
+            background-image: url('https://res.cloudinary.com/dqlhieoqv/image/upload/w_600,q_auto,ar_16:9,c_fill,g_auto,f_auto,dpr_auto/v1750412891/NETTSIDE/AdobeStock_402536324_Norge_Hoddevik_Vestkapp.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 300px;
+        }
+        .boreal-card {
+            border: 1px solid #ddd;
+            transition: transform 0.2s;
+        }
+        .boreal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        /* --- Zaui Selling Areas (Consistent but Branded) --- */
+        .zaui-sell-point {
+            background-color: #e6f7ff; /* Light blue background for selling */
+            border-left: 5px solid var(--zaui-primary);
+        }
+        .text-zaui-primary { color: var(--zaui-primary); }
+        
+        /* --- WIDGET FIX: Ensure fixed height for proper display on desktop/mobile --- */
+        .zaui-widget-wrapper iframe {
+            width: 100%;
+            height: 700px; 
+        }
+        
+        /* General content container styling */
+        .content-container {
+            background-color: white;
+            border-radius: 0 0 0.5rem 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            padding: 0; /* Content padding is handled inside the tab-content divs */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Zaui Selling Banner (Moved to top of the page content) -->
+    <div class="zaui-banner sticky top-0 z-50 p-2 text-center text-sm font-semibold tracking-wider shadow-xl">
+        This entire seamless, branded experience is <span class="text-yellow-300">POWERED BY ZAUI</span> — The leading reservation system for tours and activities.
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Main Logo Header Area -->
+        <header class="flex justify-center items-center py-6">
+            <img src="https://support.zaui.com/hc/theming_assets/01HZPB6VCANYG7T82ABJP1FWB1" alt="Zaui Logo" class="h-10 sm:h-12 w-auto filter drop-shadow-md"/>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav flex justify-center" role="tablist">
+            <button class="tab-button flex-1 py-4 px-2 text-center text-base sm:text-lg font-semibold uppercase focus:outline-none rounded-tl-lg" data-target="zaui-platform-content" role="tab" aria-selected="true">
+                Zaui Platform <span class="block text-xs font-light opacity-70">(Core System Overview)</span>
+            </button>
+            <button class="tab-button flex-1 py-4 px-2 text-center text-base sm:text-lg font-semibold uppercase focus:outline-none" data-target="pulpitrock-content" role="tab" aria-selected="false">
+                Pulpit Rock Tours
+            </button>
+            <button class="tab-button flex-1 py-4 px-2 text-center text-base sm:text-lg font-semibold uppercase focus:outline-none" data-target="skibussen-content" role="tab" aria-selected="false">
+                Skibussen
+            </button>
+            <button class="tab-button flex-1 py-4 px-2 text-center text-base sm:text-lg font-semibold uppercase focus:outline-none rounded-tr-lg" data-target="borealreiser-content" role="tab" aria-selected="false">
+                Boreal Reiser
+            </button>
+        </div>
+
+        <!-- Tab Content Containers -->
+        <div class="content-container">
+
+            <!-- 0. Zaui Platform Content (New Hero Section) -->
+            <div id="zaui-platform-content" class="tab-content active p-8" role="tabpanel">
+                <div class="flex flex-col lg:flex-row gap-8 items-center">
+                    <div class="lg:w-1/2">
+                        <h1 class="text-4xl font-extrabold text-zaui-primary mb-4">Enterprise Grade. World's Leading System.</h1>
+                        <p class="text-xl text-gray-700 mb-6">
+                            Zaui is the world's leading reservation system for tours, activities, and transportation, built for operators requiring complex logistics and multi-brand portfolio management.
+                        </p>
+                        
+                        <!-- Updated Stats/Features Block -->
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="p-4 bg-gray-100 rounded-lg shadow-inner">
+                                <p class="text-3xl font-bold text-zaui-primary">20+</p>
+                                <p class="text-sm text-gray-600">Years of Enterprise Experience</p>
+                            </div>
+                            <div class="p-4 bg-gray-100 rounded-lg shadow-inner">
+                                <p class="text-3xl font-bold text-zaui-primary">14%</p>
+                                <p class="text-sm text-gray-600">Avg. YOY Revenue Growth</p>
+                            </div>
+                            <div class="p-4 bg-gray-100 rounded-lg shadow-inner">
+                                <p class="text-3xl font-bold text-zaui-primary">500+</p>
+                                <p class="text-sm text-gray-600">Operational Tools & Features</p>
+                            </div>
+                            <div class="p-4 bg-gray-100 rounded-lg shadow-inner">
+                                <p class="text-3xl font-bold text-zaui-primary">AI</p>
+                                <p class="text-sm text-gray-600">Pricing & Inventory Management</p>
+                            </div>
+                        </div>
+                        
+                        <p class="mt-6 text-gray-600">See how three different Norwegian transportation and tourism brands leverage Zaui’s flexible technology to streamline their diverse operations.</p>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <!-- Zaui Dashboard Image -->
+                        <img src="https://cdn.prod.website-files.com/68d0f19cda95556b8fe4c233/69171ed863ecdcecdad1d24e_zaui_home-hero-img-p-800.webp" 
+                             alt="Zaui Dashboard Overview" 
+                             class="rounded-xl shadow-2xl w-full h-auto object-cover border border-gray-200"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. Pulpit Rock Content (Activity / Sightseeing Model) - Mimics Pulpitrock.no -->
+            <div id="pulpitrock-content" class="tab-content" role="tabpanel">
+                <!-- Hero Section -->
+                <div class="pulpit-rock-hero flex items-end">
+                    <div class="w-full md:w-2/5 p-6 sm:p-8 pulpit-rock-form-bg rounded-tr-lg">
+                        <img src="https://www.pulpitrock.no/images/topLogo.jpg" alt="Pulpit Rock Logo" class="h-10 w-auto mb-4"/>
+                        <h1 class="text-3xl font-bold mb-4 text-gray-800">Take the Bus to Pulpit Rock</h1>
+                        <p class="text-sm text-gray-600 mb-4">Buy your tickets here for the upcoming season.</p>
+                        
+                        <!-- ZAUI JOURNEY WIDGET: Pulpit Rock -->
+                        <div class="zaui-widget-wrapper rounded-md overflow-hidden shadow-2xl">
+                            <iframe id="zaui-widget-journey-iframe-pulpit" class="zaui-widget w-full" 
+                                src="https://borealdemo.zaui.net/booking/web/#/pulpitrocktours/widget/journey?embedStyle=embeddedframe" 
+                                title="Pulpit Rock Journey Widget" frameBorder="0" scrolling="no" style="min-height: 400px;">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content & Zaui Selling Points -->
+                <div class="p-8 md:flex gap-8">
+                    <div class="md:w-2/3">
+                        <h2 class="text-3xl font-bold mb-4 text-gray-800">Explore the majestic Preikestolen</h2>
+                        <p class="text-gray-600 mb-6">A spectacular destination that you can reach in one day. We drive you to the path that leads you towards the plateau, and give you a memorable experience of a lifetime. This experience is also worth repeating, regardless of the season or time of day. We provide transport for both hikers and cruise and hike packages.</p>
+
+                        <!-- Image 2: Pulpit Rock Trail -->
+                        <img src="https://www.mountaindesigns.com/medias/hiking-the-pulpit-rock-in-norway-1.jpg?context=bWFzdGVyfHJvb3R8Mzk4MDkyfGltYWdlL2pwZWd8cm9vdC9oZTYvaGY5LzE1NDgzNjYzMzE5MDcwL2hpa2luZy10aGUtcHVscGl0LXJvY2staW4tbm9yd2F5LTEuanBnfGM3NmMwYWNmODJjNTFhYjEyYWU2MTE5YWY2NDI2N2I3ZTY2MmYyODAwNTU5N2E4OTYzNGJkMDVjYWI1ZjZjY2M" 
+                             alt="Hiking the trail to Pulpit Rock" class="rounded-lg shadow-lg mb-6 w-full h-auto object-cover"/>
+
+                        <!-- Zaui Selling Point - Embedded -->
+                        <div class="zaui-sell-point p-6 rounded-lg shadow-md mt-6">
+                            <h4 class="text-xl font-bold mb-3">Zaui's Advantage for Activities & Sightseeing</h4>
+                            <ul class="space-y-2 list-disc list-inside text-gray-700">
+                                <li class="font-semibold">Real-time Manifests: Instantly see passenger lists for both bus and combined tours.</li>
+                                <li class="font-semibold">Inventory Pooling: Link ticket sales to vehicle seats AND guide availability seamlessly.</li>
+                                <li class="font-semibold">Multi-Tour Booking: Sell simple bus transport alongside complex Cruise+Hike combos effortlessly.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/3 mt-8 md:mt-0">
+                        <div class="pulpit-rock-box p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-3 border-b border-white pb-2">Before you book</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Ensure you are at the bus stop in time and signal clearly.</li>
+                                <li>Check our FAQ for helpful information and tips for the hike.</li>
+                                <li>Cancellations are accepted up to one week before travel for a full refund.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Skibussen Content (Shuttle / Transport Model) - Mimics Skibussen.no -->
+            <div id="skibussen-content" class="tab-content" role="tabpanel">
+                <div class="skibussen-hero flex flex-col items-center justify-center p-8 text-center">
+                    <img src="https://skibussen.no/images/logo-sirdal.png" alt="Skibussen Logo" class="h-12 w-auto mb-4"/>
+                    <h1 class="text-5xl font-extrabold text-white drop-shadow-lg">Skibussen - On the Road to Sirdal!</h1>
+                    <p class="text-xl text-white mt-2 drop-shadow-md">Your direct and reliable bus transport to the best ski slopes.</p>
+                </div>
+                
+                <div class="p-8">
+                    <div class="md:flex gap-8">
+                        <!-- Timetable and Booking -->
+                        <div class="md:w-3/5">
+                            <h3 class="text-3xl font-bold mb-6 text-gray-800">Current Timetable & Booking</h3>
+                            
+                            <div class="flex flex-col lg:flex-row gap-6 mb-8">
+                                <!-- ZAUI JOURNEY WIDGET: Skibussen -->
+                                <div class="p-0 border-0 rounded-lg shadow-md flex-1">
+                                    <div class="zaui-widget-wrapper rounded-lg overflow-hidden">
+                                        <iframe id="zaui-widget-journey-iframe-skibussen" class="zaui-widget w-full" 
+                                            src="https://borealdemo.zaui.net/booking/web/#/skibussen/widget/journey?embedStyle=embeddedframe" 
+                                            title="Skibussen Journey Widget" frameBorder="0" scrolling="no">
+                                        </iframe>
+                                    </div>
+                                </div>
+                                
+                                <!-- Timetable Mockup -->
+                                <div class="flex-1 overflow-x-auto hidden lg:block">
+                                    <table class="w-full text-left skibussen-table rounded-lg overflow-hidden shadow-lg mb-6">
+                                        <thead class="skibussen-nav">
+                                            <tr>
+                                                <th class="p-3">Route</th>
+                                                <th class="p-3">Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="bg-white">
+                                                <td class="p-3 font-semibold">Stavanger bus terminal</td>
+                                                <td class="p-3">07:30</td>
+                                            </tr>
+                                            <tr class="bg-gray-50">
+                                                <td class="p-3">Sandnes Ruten station</td>
+                                                <td class="p-3">07:50</td>
+                                            </tr>
+                                            <tr class="bg-white">
+                                                <td class="p-3 font-semibold">Tjørhomfjellet (Arrival)</td>
+                                                <td class="p-3">09:20</td>
+                                            </tr>
+                                            <tr class="bg-gray-50">
+                                                <td class="p-3">Stavanger bus terminal</td>
+                                                <td class="p-3">16:00</td>
+                                            </tr>
+                                            <tr class="bg-white">
+                                                <td class="p-3">Sandnes Ruten station</td>
+                                                <td class="p-3">16:20</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- Image 2: Ski Prices/Info -->
+                                    <img src="https://www.fidjeland.com/wp-content/uploads/2015/02/priser-fidjeland-skitrekk.jpg" 
+                                        alt="Fidjeland Skisenter Prices" class="rounded-lg shadow-lg w-full h-auto object-cover mt-4"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Zaui Selling Points -->
+                        <div class="zaui-sell-point p-6 rounded-lg shadow-md mt-8 md:mt-0 md:w-2/5 self-start">
+                            <h4 class="text-2xl font-bold mb-4">Zaui's Advantage for Fixed Route & Shuttles</h4>
+                            <ul class="space-y-3 list-disc list-inside text-gray-700">
+                                <li class="font-semibold">Route Optimization: Easily manage complex pickup/drop-off sequences and varying price zones.</li>
+                                <li class="font-semibold">Load Balancing: Ensure buses are filled optimally without exceeding capacity based on stop.</li>
+                                <li class="font-semibold">Lift Ticket Bundling: Integrate sales of ski-lift tickets (third-party products) directly with bus ticket purchases.</li>
+                                <li class="font-semibold">Cancellation Rules: Apply granular, automated cancellation and refund policies (e.g., full refund 24hr notice, partial after).</li>
+                            </ul>
+                            <p class="mt-4 text-sm font-semibold text-zaui-primary">
+                                Zaui turns your schedule into profit with automated logistics.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Boreal Reiser Content (Complex Packages / Multi-Day Model) - Mimics Borealreiser.no -->
+            <div id="borealreiser-content" class="tab-content" role="tabpanel">
+                <div class="boreal-reiser-hero flex items-center justify-center p-10">
+                    <div class="text-center p-8 bg-black bg-opacity-40 rounded-lg">
+                        <img src="https://www.borealreiser.no/clientfiles/cm5/images/logo.png" alt="Boreal Reiser Logo" class="h-8 mx-auto w-auto mb-4"/>
+                        <h1 class="text-4xl font-extrabold text-white drop-shadow-lg">Påmeldingsturer (Registration Tours)</h1>
+                        <p class="text-xl text-yellow-300 mt-2 font-light">Quality travel with bus, plane, train, and cruise for over 30 years.</p>
+                    </div>
+                </div>
+                
+                <div class="p-8">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Find Your Dream Journey</h2>
+                    
+                    <div class="md:flex gap-8">
+                        <!-- Tour Listings -->
+                        <div class="md:w-2/3 space-y-6">
+                            
+                            <!-- Image 2: Landscape image for travel inspiration -->
+                            <img src="https://res.cloudinary.com/dqlhieoqv/image/upload/w_800,q_auto,ar_16:9,c_fill,g_auto,f_auto,dpr_auto/v1730189645/Gardasj%C3%B8en/AdobeStock_390818593_Limone.jpg" 
+                                 alt="Limone on Lake Garda, Italy" class="rounded-lg shadow-lg mb-6 w-full h-auto object-cover"/>
+
+                            <h3 class="text-2xl font-bold text-gray-700 border-b pb-2">Hurtigruten+ Cruises</h3>
+
+                            <!-- Example Tour Card 1 -->
+                            <div class="boreal-card p-4 rounded-lg shadow-md bg-white flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="text-4xl mr-4 text-zaui-primary">🛳️</span>
+                                    <div>
+                                        <p class="text-xs text-gray-500 font-semibold">28.03.26</p>
+                                        <h4 class="text-xl font-semibold text-gray-800">Påskecruise med MS Nordkapp</h4>
+                                        <p class="text-sm text-gray-600">A memorable Easter journey along the Norwegian coast.</p>
+                                    </div>
+                                </div>
+                                <!-- ZAUI BUTTON EMBED: Boreal Reiser -->
+                                <a class="zaui-embed-button button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md transition duration-150 shadow-md whitespace-nowrap" 
+                                   style="undefined" 
+                                   href="https://borealdemo.zaui.net/booking/web/#/boreal/packages/category/3?" 
+                                   class="zaui-embed-button override">
+                                    Book Now
+                                </a>
+                            </div>
+
+                            <!-- Example Tour Card 2 -->
+                            <div class="boreal-card p-4 rounded-lg shadow-md bg-white flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="text-4xl mr-4 text-zaui-primary">🏔️</span>
+                                    <div>
+                                        <p class="text-xs text-gray-500 font-semibold">26.05.26</p>
+                                        <h4 class="text-xl font-semibold text-gray-800">Svalbardlinjen - A Unique Journey to the Arctic</h4>
+                                        <p class="text-sm text-gray-600">An unforgettable expedition to the realm of the Polar Bear.</p>
+                                    </div>
+                                </div>
+                                <!-- ZAUI BUTTON EMBED: Boreal Reiser -->
+                                <a class="zaui-embed-button button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md transition duration-150 shadow-md whitespace-nowrap" 
+                                   style="undefined" 
+                                   href="https://borealdemo.zaui.net/booking/web/#/boreal/packages/category/3?" 
+                                   class="zaui-embed-button override">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Zaui Selling Points -->
+                        <div class="zaui-sell-point p-6 rounded-lg shadow-md mt-8 md:mt-0 md:w-1/3 self-start">
+                            <h4 class="text-2xl font-bold mb-4">Zaui's Advantage for Complex Packages & Groups</h4>
+                            <ul class="space-y-3 list-disc list-inside text-gray-700">
+                                <li class="font-semibold">Advanced Pricing: Handle variable pricing based on room/cabin types, dates, and group size.</li>
+                                <li class="font-semibold">Deposit Management: Automatically calculate and manage required deposits and payment installment schedules.</li>
+                                <li class="font-semibold">Agent Commission: Easily track and pay commissions to travel agents and third-party resellers.</li>
+                                <li class="font-semibold">Integrated Itinerary: Provide customers with a single, comprehensive e-ticket for multi-component tours.</li>
+                            </ul>
+                            <p class="mt-4 text-sm font-semibold text-zaui-primary">
+                                Zaui structures your most complex tours for effortless booking.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- Footer for a clean finish and to eliminate negative space at the very bottom -->
+    <footer class="mt-12 py-8 bg-gray-200 text-center text-gray-600">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2024 Zaui Software Demo. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript for Tab Switching (Modified to default to Zaui Platform) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            const switchTab = (targetId) => {
+                // Deactivate all buttons and content
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Activate the corresponding button and content
+                const activeButton = document.querySelector(`[data-target="${targetId}"]`);
+                const activeContent = document.getElementById(targetId);
+
+                if (activeButton && activeContent) {
+                    activeButton.classList.add('active');
+                    activeContent.classList.add('active');
+                }
+            };
+
+            // Add event listeners to buttons
+            tabButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const targetId = e.currentTarget.getAttribute('data-target');
+                    switchTab(targetId);
+                });
+            });
+
+            // Initialize the default tab (Zaui Platform)
+            // Note: The Pulpit Rock tab previously had 'active' class in HTML, but this JS ensures 'Zaui Platform' is the default.
+            switchTab('zaui-platform-content');
+        });
+    </script>
+</body>
+</html>
