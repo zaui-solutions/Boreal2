@@ -129,6 +129,7 @@
             border-left: 5px solid var(--zaui-primary);
         }
         .text-zaui-primary { color: var(--zaui-primary); }
+        .bg-zaui-primary { background-color: var(--zaui-primary); }
         
         /* --- WIDGET FIX: Ensure fixed height for proper display on desktop/mobile --- */
         .zaui-widget-wrapper iframe {
@@ -147,9 +148,16 @@
 </head>
 <body>
 
+    <!-- INTRODUCTORY HEADER (Removed the requested text) -->
+    <div class="bg-gray-800 text-white text-center py-3 font-medium">
+        <div class="max-w-7xl mx-auto px-4">
+            This page demonstrates the power and flexibility of the Zaui Enterprise Reservation Platform through three real-world, distinct brand examples (Pulpit Rock, Skibussen, Boreal Reiser) all running on the same core technology.
+        </div>
+    </div>
+
     <!-- Zaui Selling Banner (Moved to top of the page content) -->
     <div class="zaui-banner sticky top-0 z-50 p-2 text-center text-sm font-semibold tracking-wider shadow-xl">
-        This entire seamless, branded experience is <span class="text-yellow-300">POWERED BY ZAUI</span> — The leading reservation system for tours and activities.
+        This entire seamless, branded experience is <span class="text-yellow-300">POWERED BY ZAUI</span> - The leading reservation system for tours and activities.
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -180,11 +188,13 @@
 
             <!-- 0. Zaui Platform Content (New Hero Section) -->
             <div id="zaui-platform-content" class="tab-content active p-8" role="tabpanel">
-                <div class="flex flex-col lg:flex-row gap-8 items-center">
+                <div class="flex flex-col lg:flex-row gap-8 items-center mb-12">
                     <div class="lg:w-1/2">
-                        <h1 class="text-4xl font-extrabold text-zaui-primary mb-4">Enterprise Grade. World's Leading System.</h1>
+                        <!-- Updated H1 to clarify Zaui's dual capabilities -->
+                        <h1 class="text-4xl font-extrabold text-zaui-primary mb-4">The World Leader in Tours, Activities, AND Transportation.</h1>
+                        <!-- Updated description for strong clarity -->
                         <p class="text-xl text-gray-700 mb-6">
-                            Zaui is the world's leading reservation system for tours, activities, and transportation, built for operators requiring complex logistics and multi-brand portfolio management.
+                            Zaui is the world's only all-in-one Enterprise Reservation Platform, purpose-built to manage the complex logistics of both Tours & Activities (Sightseeing, Multi-Day, Cruises) and Fleet Transportation (Shuttles, Fixed-Routes, Charters) across a multi-brand portfolio.
                         </p>
                         
                         <!-- Updated Stats/Features Block -->
@@ -209,13 +219,86 @@
                         
                         <p class="mt-6 text-gray-600">See how three different Norwegian transportation and tourism brands leverage Zaui’s flexible technology to streamline their diverse operations.</p>
                     </div>
-                    <div class="lg:w-1/2">
-                        <!-- Zaui Dashboard Image -->
+                    
+                    <!-- Zaui Dashboard Image - Adjusted classes to prevent cutoff -->
+                    <div class="lg:w-1/2 flex justify-center items-center">
                         <img src="https://cdn.prod.website-files.com/68d0f19cda95556b8fe4c233/69171ed863ecdcecdad1d24e_zaui_home-hero-img-p-800.webp" 
                              alt="Zaui Dashboard Overview" 
-                             class="rounded-xl shadow-2xl w-full h-auto object-cover border border-gray-200"/>
+                             class="rounded-xl shadow-2xl w-full object-contain border border-gray-200 max-h-[60vh]"/>
                     </div>
                 </div>
+
+                <!-- NEW SECTION: TRANSPORTATION & SHUTTLES (Redesigned with Image and cleanup) -->
+                <div class="border-t border-gray-200 pt-10 mb-12">
+                    <h2 class="text-3xl font-extrabold text-gray-800 mb-6">Transportation & Shuttle Solutions</h2>
+                    
+                    <!-- Added Transportation Image -->
+                    <img src="https://banfflakelouise.bynder.com/m/51457567b3d9c4ea/2000x1080_jpg-2023_BanffNationalPark_MountainParkTransportation_Vehicle.jpg" 
+                        alt="Luxury Shuttle Bus" class="rounded-xl shadow-lg w-full h-auto object-cover mb-8 border-2 border-zaui-primary/20"/>
+                    
+                    <div class="md:flex gap-8">
+                        <div class="md:w-2/3">
+                            <h3 class="text-2xl font-semibold text-zaui-primary mb-3">Trusted by the World's Leading Transportation Companies</h3>
+                            <p class="text-gray-600 mb-6">
+                                Zaui puts you in the driver's seat. Our platform is purpose-built to automate route management, optimize fleet capacity, and eliminate booking chaos across fixed-route, shuttle, and charter services. 
+                                Leverage real-time inventory, mobile check-in (with QR codes), and dynamic pricing to maximize seat occupancy and revenue.
+                            </p>
+                            <!-- Removed ** for bolding -->
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 font-medium">
+                                <li>End Operational Bottlenecks: Optimize vehicle schedules and resources with real-time dashboards.</li>
+                                <li>Real-Time Availability: Prevent overbooking by instantly updating inventory across all sales channels (website, agents, OTAs).</li>
+                                <li>Passenger Experience: Speed up boarding with contactless mobile ticket scanning and ensure clear communication with automated SMS/email alerts for disruptions.</li>
+                            </ul>
+                        </div>
+                        <div class="md:w-1/3 mt-6 md:mt-0 p-6 bg-gray-50 rounded-xl border-2 border-zaui-primary/50 shadow-inner">
+                            <h4 class="text-lg font-bold mb-3 text-gray-800">Our Transportation Customers</h4>
+                            <ul class="space-y-3">
+                                <li><a href="https://www.trolltunga-shuttle.com/" target="_blank" class="text-zaui-primary hover:text-orange-500 font-medium underline">Trolltunga Shuttle (Norway)</a></li>
+                                <li><a href="https://www.skydrive.co.nz/" target="_blank" class="text-zaui-primary hover:text-orange-500 font-medium underline">SkyDrive (New Zealand)</a></li>
+                                <li><a href="https://banffairporter.com/" target="_blank" class="text-zaui-primary hover:text-orange-500 font-medium underline">Banff Airporter (Canada)</a></li>
+                            </ul>
+                            <div class="mt-4 p-3 bg-zaui-primary rounded-md text-white text-sm font-light">
+                                <p>Zaui transforms your manual schedule into a self-managing, profitable booking engine.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW SECTION: TOURS & ACTIVITIES (Redesigned with Image and cleanup) -->
+                <div class="border-t border-gray-200 pt-10 mb-12">
+                    <h2 class="text-3xl font-extrabold text-gray-800 mb-6">Tours & Activities Management</h2>
+                    
+                    <!-- Added Activities Image -->
+                    <img src="https://www.banffadventures.com/site/assets/files/6254/banff_gondola_cabins.800x580.jpg" 
+                        alt="Banff Gondola Cabins" class="rounded-xl shadow-lg w-full h-auto object-cover mb-8 border-2 border-zaui-primary/20"/>
+
+                    <div class="md:flex flex-row-reverse gap-8">
+                        <div class="md:w-2/3">
+                            <h3 class="text-2xl font-semibold text-zaui-primary mb-3">The All-in-One Platform for Multi-Day, Sightseeing, and Adventure Tours</h3>
+                            <p class="text-gray-600 mb-6">
+                                Go beyond simple booking. Zaui is built for the complexity of experience-based businesses. Manage multi-day itineraries, connect with the global distribution ecosystem, and use advanced tools like digital waivers and multi-resource assignment to grow efficiently.
+                            </p>
+                            <!-- Removed ** for bolding -->
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 font-medium">
+                                <li>Revenue Maximization: Use Dynamic Pricing to adjust rates based on demand, season, or group size, and drive direct bookings via Google 'Things to Do' integration.</li>
+                                <li>Channel Manager: Seamlessly broadcast inventory to major OTAs (Viator, GetYourGuide) and local partners (Zaui Connect), eliminating overbooking risk.</li>
+                                <li>Simplify Operations: Centralize guest management, guide assignments, and automatically send confirmations, reminders, and post-tour communications.</li>
+                            </ul>
+                        </div>
+                        <div class="md:w-1/3 mt-6 md:mt-0 p-6 bg-gray-50 rounded-xl border-2 border-zaui-primary/50 shadow-inner self-start">
+                            <h4 class="text-lg font-bold mb-3 text-gray-800">Our Activities Customers</h4>
+                            <ul class="space-y-3">
+                                <li><a href="https://www.banffadventures.com" target="_blank" class="text-zaui-primary hover:text-orange-500 font-medium underline">Banff Adventures (Canada)</a></li>
+                                <li><a href="https://www.straytravel.com/" target="_blank" class="text-zaui-primary hover:text-orange-500 font-medium underline">Stray Travel (New Zealand)</a></li>
+                                <li><a href="https://orcaspirit.com/" target="_blank" class="text-zaui-primary hover:text-orange-500 font-medium underline">Orca Spirit Adventures (Canada)</a></li>
+                            </ul>
+                            <div class="mt-4 p-3 bg-zaui-primary rounded-md text-white text-sm font-light">
+                                <p>Spend less time on spreadsheets and more time delivering unforgettable experiences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- 1. Pulpit Rock Content (Activity / Sightseeing Model) - Mimics Pulpitrock.no -->
@@ -244,7 +327,7 @@
                         <p class="text-gray-600 mb-6">A spectacular destination that you can reach in one day. We drive you to the path that leads you towards the plateau, and give you a memorable experience of a lifetime. This experience is also worth repeating, regardless of the season or time of day. We provide transport for both hikers and cruise and hike packages.</p>
 
                         <!-- Image 2: Pulpit Rock Trail -->
-                        <img src="https://www.mountaindesigns.com/medias/hiking-the-pulpit-rock-in-norway-1.jpg?context=bWFzdGVyfHJvb3R8Mzk4MDkyfGltYWdlL2pwZWd8cm9vdC9oZTYvaGY5LzE1NDgzNjYzMzE5MDcwL2hpa2luZy10aGUtcHVscGl0LXJvY2staW4tbm9yd2F5LTEuanBnfGM3NmMwYWNmODJjNTFhYjEyYWU2MTE5YWY2NDI2N2I3ZTY2MmYyODAwNTU5N2E4OTYzNGJkMDVjYWI1ZjZjY2M" 
+                        <img src="https://www.mountaindesigns.com/medias/hiking-the-pulpit-rock-in-norway-1.jpg?context=bWFzdGVyfHJvb3R8Mzk4MDkyfGltYWdlL2pwZWd8cm9vdC9oZTYvaGY5LzE1NDgzNjYzMzE5MDcwL2hpa2luZy10aGUtcHVscGl0LXJvY2staW4tbm9yd2F5LTEuanBnfGM3NmMwYWNmODJjNTFhYjEyYWU2MTE5N2E4OTYzNGJkMDVjYWI1ZjZjY2M" 
                              alt="Hiking the trail to Pulpit Rock" class="rounded-lg shadow-lg mb-6 w-full h-auto object-cover"/>
 
                         <!-- Zaui Selling Point - Embedded -->
@@ -437,7 +520,8 @@
     <!-- Footer for a clean finish and to eliminate negative space at the very bottom -->
     <footer class="mt-12 py-8 bg-gray-200 text-center text-gray-600">
         <div class="max-w-7xl mx-auto px-4">
-            <p>&copy; 2024 Zaui Software Demo. All rights reserved.</p>
+            <!-- Updated year to 2025 -->
+            <p>&copy; 2025 Zaui Software Demo. All rights reserved.</p>
         </div>
     </footer>
 
