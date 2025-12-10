@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Zaui Embedded Booking API (Added once for all widgets) -->
+    <!-- Note: Zaui API is loaded here, but the widget inside the hidden tab needs a manual trigger to render when the tab becomes active. -->
     <script src="https://borealdemo.zaui.net/themes/default/js/zaui-embed-api-v1.js" defer></script>
 
     <style>
@@ -134,7 +135,8 @@
         /* --- WIDGET FIX: Ensure fixed height for proper display on desktop/mobile --- */
         .zaui-widget-wrapper iframe {
             width: 100%;
-            height: 700px; 
+            /* Decreased default height slightly as we are displaying two side-by-side */
+            height: 600px; 
         }
         
         /* General content container styling */
@@ -223,8 +225,8 @@
                     <!-- Zaui Dashboard Image - Adjusted classes to prevent cutoff -->
                     <div class="lg:w-1/2 flex justify-center items-center">
                         <img src="https://cdn.prod.website-files.com/68d0f19cda95556b8fe4c233/69171ed863ecdcecdad1d24e_zaui_home-hero-img-p-800.webp" 
-                             alt="Zaui Dashboard Overview" 
-                             class="rounded-xl shadow-2xl w-full object-contain border border-gray-200 max-h-[60vh]"/>
+                            alt="Zaui Dashboard Overview" 
+                            class="rounded-xl shadow-2xl w-full object-contain border border-gray-200 max-h-[60vh]"/>
                     </div>
                 </div>
 
@@ -328,7 +330,7 @@
 
                         <!-- Image 2: Pulpit Rock Trail -->
                         <img src="https://www.mountaindesigns.com/medias/hiking-the-pulpit-rock-in-norway-1.jpg?context=bWFzdGVyfHJvb3R8Mzk4MDkyfGltYWdlL2pwZWd8cm9vdC9oZTYvaGY5LzE1NDgzNjYzMzE5MDcwL2hpa2luZy10aGUtcHVscGl0LXJvY2staW4tbm9yd2F5LTEuanBnfGM3NmMwYWNmODJjNTFhYjEyYWU2MTE5N2E4OTYzNGJkMDVjYWI1ZjZjY2M" 
-                             alt="Hiking the trail to Pulpit Rock" class="rounded-lg shadow-lg mb-6 w-full h-auto object-cover"/>
+                            alt="Hiking the trail to Pulpit Rock" class="rounded-lg shadow-lg mb-6 w-full h-auto object-cover"/>
 
                         <!-- Zaui Selling Point - Embedded -->
                         <div class="zaui-sell-point p-6 rounded-lg shadow-md mt-6">
@@ -363,63 +365,44 @@
                 </div>
                 
                 <div class="p-8">
-                    <div class="md:flex gap-8">
-                        <!-- Timetable and Booking -->
-                        <div class="md:w-3/5">
-                            <h3 class="text-3xl font-bold mb-6 text-gray-800">Current Timetable & Booking</h3>
-                            
-                            <div class="flex flex-col lg:flex-row gap-6 mb-8">
-                                <!-- ZAUI JOURNEY WIDGET: Skibussen -->
-                                <div class="p-0 border-0 rounded-lg shadow-md flex-1">
-                                    <div class="zaui-widget-wrapper rounded-lg overflow-hidden">
-                                        <iframe id="zaui-widget-journey-iframe-skibussen" class="zaui-widget w-full" 
-                                            src="https://borealdemo.zaui.net/booking/web/#/skibussen/widget/journey?embedStyle=embeddedframe" 
-                                            title="Skibussen Journey Widget" frameBorder="0" scrolling="no">
-                                        </iframe>
-                                    </div>
-                                </div>
-                                
-                                <!-- Timetable Mockup -->
-                                <div class="flex-1 overflow-x-auto hidden lg:block">
-                                    <table class="w-full text-left skibussen-table rounded-lg overflow-hidden shadow-lg mb-6">
-                                        <thead class="skibussen-nav">
-                                            <tr>
-                                                <th class="p-3">Route</th>
-                                                <th class="p-3">Time</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="bg-white">
-                                                <td class="p-3 font-semibold">Stavanger bus terminal</td>
-                                                <td class="p-3">07:30</td>
-                                            </tr>
-                                            <tr class="bg-gray-50">
-                                                <td class="p-3">Sandnes Ruten station</td>
-                                                <td class="p-3">07:50</td>
-                                            </tr>
-                                            <tr class="bg-white">
-                                                <td class="p-3 font-semibold">Tjørhomfjellet (Arrival)</td>
-                                                <td class="p-3">09:20</td>
-                                            </tr>
-                                            <tr class="bg-gray-50">
-                                                <td class="p-3">Stavanger bus terminal</td>
-                                                <td class="p-3">16:00</td>
-                                            </tr>
-                                            <tr class="bg-white">
-                                                <td class="p-3">Sandnes Ruten station</td>
-                                                <td class="p-3">16:20</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- Image 2: Ski Prices/Info -->
-                                    <img src="https://www.fidjeland.com/wp-content/uploads/2015/02/priser-fidjeland-skitrekk.jpg" 
-                                        alt="Fidjeland Skisenter Prices" class="rounded-lg shadow-lg w-full h-auto object-cover mt-4"/>
-                                </div>
+                    <!-- Updated layout for two wide widgets side-by-side (Request 1) -->
+                    <h3 class="text-3xl font-bold mb-6 text-gray-800">Current Timetable & Booking</h3>
+                    
+                    <div class="flex flex-col md:flex-row gap-6 mb-8">
+                        
+                        <!-- ZAUI JOURNEY WIDGET 1: Outbound Trip -->
+                        <div class="md:w-1/2 p-0 border-0 rounded-lg shadow-md">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2 text-center">Book Your Outbound Trip</h4>
+                            <div class="zaui-widget-wrapper rounded-lg overflow-hidden shadow-2xl">
+                                <iframe id="zaui-widget-journey-iframe-skibussen-out" class="zaui-widget w-full"
+                                    src="https://borealdemo.zaui.net/booking/web/#/skibussen/widget/journey?embedStyle=embeddedframe"
+                                    title="Skibussen Outbound Journey Widget" frameBorder="0" scrolling="no" style="min-height: 400px;">
+                                </iframe>
                             </div>
                         </div>
-
+                        
+                        <!-- ZAUI JOURNEY WIDGET 2: Return Trip -->
+                        <div class="md:w-1/2 p-0 border-0 rounded-lg shadow-md">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2 text-center">Book Your Return Trip</h4>
+                            <div class="zaui-widget-wrapper rounded-lg overflow-hidden shadow-2xl">
+                                <iframe id="zaui-widget-journey-iframe-skibussen-return" class="zaui-widget w-full"
+                                    src="https://borealdemo.zaui.net/booking/web/#/skibussen/widget/journey?embedStyle=embeddedframe"
+                                    title="Skibussen Return Journey Widget" frameBorder="0" scrolling="no" style="min-height: 400px;">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Separate the Zaui Selling Points to give the widgets more width -->
+                    <div class="md:flex gap-8">
+                        <div class="md:w-1/2">
+                             <!-- Image 2: Ski Prices/Info -->
+                            <img src="https://www.fidjeland.com/wp-content/uploads/2015/02/priser-fidjeland-skitrekk.jpg" 
+                                alt="Fidjeland Skisenter Prices" class="rounded-lg shadow-lg w-full h-auto object-cover"/>
+                        </div>
+                        
                         <!-- Zaui Selling Points -->
-                        <div class="zaui-sell-point p-6 rounded-lg shadow-md mt-8 md:mt-0 md:w-2/5 self-start">
+                        <div class="zaui-sell-point p-6 rounded-lg shadow-md mt-8 md:mt-0 md:w-1/2 self-start">
                             <h4 class="text-2xl font-bold mb-4">Zaui's Advantage for Fixed Route & Shuttles</h4>
                             <ul class="space-y-3 list-disc list-inside text-gray-700">
                                 <li class="font-semibold">Route Optimization: Easily manage complex pickup/drop-off sequences and varying price zones.</li>
@@ -454,7 +437,7 @@
                             
                             <!-- Image 2: Landscape image for travel inspiration -->
                             <img src="https://res.cloudinary.com/dqlhieoqv/image/upload/w_800,q_auto,ar_16:9,c_fill,g_auto,f_auto,dpr_auto/v1730189645/Gardasj%C3%B8en/AdobeStock_390818593_Limone.jpg" 
-                                 alt="Limone on Lake Garda, Italy" class="rounded-lg shadow-lg mb-6 w-full h-auto object-cover"/>
+                                alt="Limone on Lake Garda, Italy" class="rounded-lg shadow-lg mb-6 w-full h-auto object-cover"/>
 
                             <h3 class="text-2xl font-bold text-gray-700 border-b pb-2">Hurtigruten+ Cruises</h3>
 
@@ -470,9 +453,9 @@
                                 </div>
                                 <!-- ZAUI BUTTON EMBED: Boreal Reiser -->
                                 <a class="zaui-embed-button button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md transition duration-150 shadow-md whitespace-nowrap" 
-                                   style="undefined" 
-                                   href="https://borealdemo.zaui.net/booking/web/#/boreal/packages/category/3?" 
-                                   class="zaui-embed-button override">
+                                    style="undefined" 
+                                    href="https://borealdemo.zaui.net/booking/web/#/boreal/packages/category/3?" 
+                                    class="zaui-embed-button override">
                                     Book Now
                                 </a>
                             </div>
@@ -489,9 +472,9 @@
                                 </div>
                                 <!-- ZAUI BUTTON EMBED: Boreal Reiser -->
                                 <a class="zaui-embed-button button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md transition duration-150 shadow-md whitespace-nowrap" 
-                                   style="undefined" 
-                                   href="https://borealdemo.zaui.net/booking/web/#/boreal/packages/category/3?" 
-                                   class="zaui-embed-button override">
+                                    style="undefined" 
+                                    href="https://borealdemo.zaui.net/booking/web/#/boreal/packages/category/3?" 
+                                    class="zaui-embed-button override">
                                     Book Now
                                 </a>
                             </div>
@@ -526,8 +509,21 @@
     </footer>
 
 
-    <!-- JavaScript for Tab Switching (Modified to default to Zaui Platform) -->
+    <!-- JavaScript for Tab Switching and Widget Fix -->
     <script>
+        // Function to force an iframe to redraw and potentially fix initialization issues in hidden containers (Request 2 Fix)
+        const refreshIframe = (iframeId) => {
+            const iframe = document.getElementById(iframeId);
+            if (iframe) {
+                // Apply a display toggle trick to force the browser to recalculate the iframe's layout
+                // which often triggers the embedded Zaui script to render correctly inside the visible area.
+                iframe.style.display = 'none';
+                // Reading offsetHeight forces a reflow, making the browser acknowledge the style change.
+                iframe.offsetHeight; 
+                iframe.style.display = 'block';
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
@@ -545,6 +541,17 @@
                     activeButton.classList.add('active');
                     activeContent.classList.add('active');
                 }
+                
+                // --- WIDGET RE-INITIALIZATION FIX ---
+                // Manually trigger the redraw for the widget(s) in the active tab to fix the "not opening" issue.
+                if (targetId === 'pulpitrock-content') {
+                    // Pulpit Rock has one widget
+                    refreshIframe('zaui-widget-journey-iframe-pulpit');
+                } else if (targetId === 'skibussen-content') {
+                    // Skibussen now has two side-by-side widgets (Request 1 Fix)
+                    refreshIframe('zaui-widget-journey-iframe-skibussen-out');
+                    refreshIframe('zaui-widget-journey-iframe-skibussen-return');
+                }
             };
 
             // Add event listeners to buttons
@@ -555,8 +562,7 @@
                 });
             });
 
-            // Initialize the default tab (Zaui Platform)
-            // Note: The Pulpit Rock tab previously had 'active' class in HTML, but this JS ensures 'Zaui Platform' is the default.
+            // Initialize the default tab (Zaui Platform) and ensure its widget renders if it had one
             switchTab('zaui-platform-content');
         });
     </script>
